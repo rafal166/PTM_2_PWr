@@ -1,0 +1,303 @@
+
+Lab_1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000021c  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000020  00800060  0000021c  00000290  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000002b0  2**0
+                  CONTENTS, READONLY
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	29 c0       	rjmp	.+82     	; 0x54 <__ctors_end>
+   2:	00 00       	nop
+   4:	3a c0       	rjmp	.+116    	; 0x7a <__bad_interrupt>
+   6:	00 00       	nop
+   8:	38 c0       	rjmp	.+112    	; 0x7a <__bad_interrupt>
+   a:	00 00       	nop
+   c:	36 c0       	rjmp	.+108    	; 0x7a <__bad_interrupt>
+   e:	00 00       	nop
+  10:	34 c0       	rjmp	.+104    	; 0x7a <__bad_interrupt>
+  12:	00 00       	nop
+  14:	32 c0       	rjmp	.+100    	; 0x7a <__bad_interrupt>
+  16:	00 00       	nop
+  18:	30 c0       	rjmp	.+96     	; 0x7a <__bad_interrupt>
+  1a:	00 00       	nop
+  1c:	2e c0       	rjmp	.+92     	; 0x7a <__bad_interrupt>
+  1e:	00 00       	nop
+  20:	2c c0       	rjmp	.+88     	; 0x7a <__bad_interrupt>
+  22:	00 00       	nop
+  24:	2a c0       	rjmp	.+84     	; 0x7a <__bad_interrupt>
+  26:	00 00       	nop
+  28:	28 c0       	rjmp	.+80     	; 0x7a <__bad_interrupt>
+  2a:	00 00       	nop
+  2c:	26 c0       	rjmp	.+76     	; 0x7a <__bad_interrupt>
+  2e:	00 00       	nop
+  30:	24 c0       	rjmp	.+72     	; 0x7a <__bad_interrupt>
+  32:	00 00       	nop
+  34:	22 c0       	rjmp	.+68     	; 0x7a <__bad_interrupt>
+  36:	00 00       	nop
+  38:	20 c0       	rjmp	.+64     	; 0x7a <__bad_interrupt>
+  3a:	00 00       	nop
+  3c:	1e c0       	rjmp	.+60     	; 0x7a <__bad_interrupt>
+  3e:	00 00       	nop
+  40:	1c c0       	rjmp	.+56     	; 0x7a <__bad_interrupt>
+  42:	00 00       	nop
+  44:	1a c0       	rjmp	.+52     	; 0x7a <__bad_interrupt>
+  46:	00 00       	nop
+  48:	18 c0       	rjmp	.+48     	; 0x7a <__bad_interrupt>
+  4a:	00 00       	nop
+  4c:	16 c0       	rjmp	.+44     	; 0x7a <__bad_interrupt>
+  4e:	00 00       	nop
+  50:	14 c0       	rjmp	.+40     	; 0x7a <__bad_interrupt>
+	...
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	ec e1       	ldi	r30, 0x1C	; 28
+  68:	f2 e0       	ldi	r31, 0x02	; 2
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a0 38       	cpi	r26, 0x80	; 128
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+  76:	86 d0       	rcall	.+268    	; 0x184 <main>
+  78:	cf c0       	rjmp	.+414    	; 0x218 <_exit>
+
+0000007a <__bad_interrupt>:
+  7a:	c2 cf       	rjmp	.-124    	; 0x0 <__vectors>
+
+0000007c <setLED.part.0>:
+  7c:	92 b3       	in	r25, 0x12	; 18
+  7e:	81 50       	subi	r24, 0x01	; 1
+  80:	21 e0       	ldi	r18, 0x01	; 1
+  82:	30 e0       	ldi	r19, 0x00	; 0
+  84:	08 2e       	mov	r0, r24
+  86:	01 c0       	rjmp	.+2      	; 0x8a <setLED.part.0+0xe>
+  88:	22 0f       	add	r18, r18
+  8a:	0a 94       	dec	r0
+  8c:	ea f7       	brpl	.-6      	; 0x88 <setLED.part.0+0xc>
+  8e:	92 2b       	or	r25, r18
+  90:	92 bb       	out	0x12, r25	; 18
+  92:	08 95       	ret
+
+00000094 <setLED>:
+  94:	61 11       	cpse	r22, r1
+  96:	f2 cf       	rjmp	.-28     	; 0x7c <setLED.part.0>
+  98:	92 b3       	in	r25, 0x12	; 18
+  9a:	81 50       	subi	r24, 0x01	; 1
+  9c:	21 e0       	ldi	r18, 0x01	; 1
+  9e:	30 e0       	ldi	r19, 0x00	; 0
+  a0:	08 2e       	mov	r0, r24
+  a2:	01 c0       	rjmp	.+2      	; 0xa6 <setLED+0x12>
+  a4:	22 0f       	add	r18, r18
+  a6:	0a 94       	dec	r0
+  a8:	ea f7       	brpl	.-6      	; 0xa4 <setLED+0x10>
+  aa:	20 95       	com	r18
+  ac:	29 23       	and	r18, r25
+  ae:	22 bb       	out	0x12, r18	; 18
+  b0:	08 95       	ret
+
+000000b2 <getButton>:
+  b2:	cf 93       	push	r28
+  b4:	df 93       	push	r29
+  b6:	cd b7       	in	r28, 0x3d	; 61
+  b8:	de b7       	in	r29, 0x3e	; 62
+  ba:	a0 97       	sbiw	r28, 0x20	; 32
+  bc:	0f b6       	in	r0, 0x3f	; 63
+  be:	f8 94       	cli
+  c0:	de bf       	out	0x3e, r29	; 62
+  c2:	0f be       	out	0x3f, r0	; 63
+  c4:	cd bf       	out	0x3d, r28	; 61
+  c6:	80 e2       	ldi	r24, 0x20	; 32
+  c8:	e0 e6       	ldi	r30, 0x60	; 96
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+  cc:	de 01       	movw	r26, r28
+  ce:	11 96       	adiw	r26, 0x01	; 1
+  d0:	01 90       	ld	r0, Z+
+  d2:	0d 92       	st	X+, r0
+  d4:	8a 95       	dec	r24
+  d6:	e1 f7       	brne	.-8      	; 0xd0 <getButton+0x1e>
+  d8:	e7 e0       	ldi	r30, 0x07	; 7
+  da:	f0 e0       	ldi	r31, 0x00	; 0
+  dc:	61 e0       	ldi	r22, 0x01	; 1
+  de:	70 e0       	ldi	r23, 0x00	; 0
+  e0:	85 b3       	in	r24, 0x15	; 21
+  e2:	ab 01       	movw	r20, r22
+  e4:	0e 2e       	mov	r0, r30
+  e6:	01 c0       	rjmp	.+2      	; 0xea <getButton+0x38>
+  e8:	44 0f       	add	r20, r20
+  ea:	0a 94       	dec	r0
+  ec:	ea f7       	brpl	.-6      	; 0xe8 <getButton+0x36>
+  ee:	84 2b       	or	r24, r20
+  f0:	85 bb       	out	0x15, r24	; 21
+  f2:	83 e0       	ldi	r24, 0x03	; 3
+  f4:	90 e0       	ldi	r25, 0x00	; 0
+  f6:	23 b3       	in	r18, 0x13	; 19
+  f8:	30 e0       	ldi	r19, 0x00	; 0
+  fa:	08 2e       	mov	r0, r24
+  fc:	02 c0       	rjmp	.+4      	; 0x102 <getButton+0x50>
+  fe:	35 95       	asr	r19
+ 100:	27 95       	ror	r18
+ 102:	0a 94       	dec	r0
+ 104:	e2 f7       	brpl	.-8      	; 0xfe <getButton+0x4c>
+ 106:	20 ff       	sbrs	r18, 0
+ 108:	27 c0       	rjmp	.+78     	; 0x158 <getButton+0xa6>
+ 10a:	41 e0       	ldi	r20, 0x01	; 1
+ 10c:	50 e0       	ldi	r21, 0x00	; 0
+ 10e:	08 2e       	mov	r0, r24
+ 110:	02 c0       	rjmp	.+4      	; 0x116 <getButton+0x64>
+ 112:	44 0f       	add	r20, r20
+ 114:	55 1f       	adc	r21, r21
+ 116:	0a 94       	dec	r0
+ 118:	e2 f7       	brpl	.-8      	; 0x112 <getButton+0x60>
+ 11a:	23 b3       	in	r18, 0x13	; 19
+ 11c:	30 e0       	ldi	r19, 0x00	; 0
+ 11e:	24 23       	and	r18, r20
+ 120:	35 23       	and	r19, r21
+ 122:	23 2b       	or	r18, r19
+ 124:	39 f0       	breq	.+14     	; 0x134 <getButton+0x82>
+ 126:	af e1       	ldi	r26, 0x1F	; 31
+ 128:	be e4       	ldi	r27, 0x4E	; 78
+ 12a:	11 97       	sbiw	r26, 0x01	; 1
+ 12c:	f1 f7       	brne	.-4      	; 0x12a <getButton+0x78>
+ 12e:	00 c0       	rjmp	.+0      	; 0x130 <getButton+0x7e>
+ 130:	00 00       	nop
+ 132:	f3 cf       	rjmp	.-26     	; 0x11a <getButton+0x68>
+ 134:	34 97       	sbiw	r30, 0x04	; 4
+ 136:	ee 0f       	add	r30, r30
+ 138:	ff 1f       	adc	r31, r31
+ 13a:	ee 0f       	add	r30, r30
+ 13c:	ff 1f       	adc	r31, r31
+ 13e:	e8 0f       	add	r30, r24
+ 140:	f9 1f       	adc	r31, r25
+ 142:	ee 0f       	add	r30, r30
+ 144:	ff 1f       	adc	r31, r31
+ 146:	81 e0       	ldi	r24, 0x01	; 1
+ 148:	90 e0       	ldi	r25, 0x00	; 0
+ 14a:	8c 0f       	add	r24, r28
+ 14c:	9d 1f       	adc	r25, r29
+ 14e:	e8 0f       	add	r30, r24
+ 150:	f9 1f       	adc	r31, r25
+ 152:	80 81       	ld	r24, Z
+ 154:	91 81       	ldd	r25, Z+1	; 0x01
+ 156:	0d c0       	rjmp	.+26     	; 0x172 <getButton+0xc0>
+ 158:	01 97       	sbiw	r24, 0x01	; 1
+ 15a:	68 f6       	brcc	.-102    	; 0xf6 <getButton+0x44>
+ 15c:	85 b3       	in	r24, 0x15	; 21
+ 15e:	40 95       	com	r20
+ 160:	48 23       	and	r20, r24
+ 162:	45 bb       	out	0x15, r20	; 21
+ 164:	31 97       	sbiw	r30, 0x01	; 1
+ 166:	e3 30       	cpi	r30, 0x03	; 3
+ 168:	f1 05       	cpc	r31, r1
+ 16a:	09 f0       	breq	.+2      	; 0x16e <getButton+0xbc>
+ 16c:	b9 cf       	rjmp	.-142    	; 0xe0 <getButton+0x2e>
+ 16e:	8f ef       	ldi	r24, 0xFF	; 255
+ 170:	9f ef       	ldi	r25, 0xFF	; 255
+ 172:	a0 96       	adiw	r28, 0x20	; 32
+ 174:	0f b6       	in	r0, 0x3f	; 63
+ 176:	f8 94       	cli
+ 178:	de bf       	out	0x3e, r29	; 62
+ 17a:	0f be       	out	0x3f, r0	; 63
+ 17c:	cd bf       	out	0x3d, r28	; 61
+ 17e:	df 91       	pop	r29
+ 180:	cf 91       	pop	r28
+ 182:	08 95       	ret
+
+00000184 <main>:
+ 184:	80 e0       	ldi	r24, 0x00	; 0
+ 186:	90 e0       	ldi	r25, 0x00	; 0
+ 188:	41 e0       	ldi	r20, 0x01	; 1
+ 18a:	50 e0       	ldi	r21, 0x00	; 0
+ 18c:	61 b3       	in	r22, 0x11	; 17
+ 18e:	9a 01       	movw	r18, r20
+ 190:	08 2e       	mov	r0, r24
+ 192:	01 c0       	rjmp	.+2      	; 0x196 <main+0x12>
+ 194:	22 0f       	add	r18, r18
+ 196:	0a 94       	dec	r0
+ 198:	ea f7       	brpl	.-6      	; 0x194 <main+0x10>
+ 19a:	62 2b       	or	r22, r18
+ 19c:	61 bb       	out	0x11, r22	; 17
+ 19e:	01 96       	adiw	r24, 0x01	; 1
+ 1a0:	88 30       	cpi	r24, 0x08	; 8
+ 1a2:	91 05       	cpc	r25, r1
+ 1a4:	99 f7       	brne	.-26     	; 0x18c <main+0x8>
+ 1a6:	c1 e0       	ldi	r28, 0x01	; 1
+ 1a8:	60 e0       	ldi	r22, 0x00	; 0
+ 1aa:	8c 2f       	mov	r24, r28
+ 1ac:	73 df       	rcall	.-282    	; 0x94 <setLED>
+ 1ae:	cf 5f       	subi	r28, 0xFF	; 255
+ 1b0:	c9 30       	cpi	r28, 0x09	; 9
+ 1b2:	d1 f7       	brne	.-12     	; 0x1a8 <main+0x24>
+ 1b4:	7e df       	rcall	.-260    	; 0xb2 <getButton>
+ 1b6:	ac 01       	movw	r20, r24
+ 1b8:	41 50       	subi	r20, 0x01	; 1
+ 1ba:	51 09       	sbc	r21, r1
+ 1bc:	48 30       	cpi	r20, 0x08	; 8
+ 1be:	51 05       	cpc	r21, r1
+ 1c0:	70 f4       	brcc	.+28     	; 0x1de <main+0x5a>
+ 1c2:	22 b3       	in	r18, 0x12	; 18
+ 1c4:	30 e0       	ldi	r19, 0x00	; 0
+ 1c6:	02 c0       	rjmp	.+4      	; 0x1cc <main+0x48>
+ 1c8:	35 95       	asr	r19
+ 1ca:	27 95       	ror	r18
+ 1cc:	4a 95       	dec	r20
+ 1ce:	e2 f7       	brpl	.-8      	; 0x1c8 <main+0x44>
+ 1d0:	20 ff       	sbrs	r18, 0
+ 1d2:	03 c0       	rjmp	.+6      	; 0x1da <main+0x56>
+ 1d4:	60 e0       	ldi	r22, 0x00	; 0
+ 1d6:	5e df       	rcall	.-324    	; 0x94 <setLED>
+ 1d8:	15 c0       	rjmp	.+42     	; 0x204 <main+0x80>
+ 1da:	50 df       	rcall	.-352    	; 0x7c <setLED.part.0>
+ 1dc:	13 c0       	rjmp	.+38     	; 0x204 <main+0x80>
+ 1de:	8d 30       	cpi	r24, 0x0D	; 13
+ 1e0:	91 05       	cpc	r25, r1
+ 1e2:	39 f4       	brne	.+14     	; 0x1f2 <main+0x6e>
+ 1e4:	c1 e0       	ldi	r28, 0x01	; 1
+ 1e6:	8c 2f       	mov	r24, r28
+ 1e8:	49 df       	rcall	.-366    	; 0x7c <setLED.part.0>
+ 1ea:	cf 5f       	subi	r28, 0xFF	; 255
+ 1ec:	c9 30       	cpi	r28, 0x09	; 9
+ 1ee:	d9 f7       	brne	.-10     	; 0x1e6 <main+0x62>
+ 1f0:	09 c0       	rjmp	.+18     	; 0x204 <main+0x80>
+ 1f2:	0f 97       	sbiw	r24, 0x0f	; 15
+ 1f4:	39 f4       	brne	.+14     	; 0x204 <main+0x80>
+ 1f6:	c1 e0       	ldi	r28, 0x01	; 1
+ 1f8:	60 e0       	ldi	r22, 0x00	; 0
+ 1fa:	8c 2f       	mov	r24, r28
+ 1fc:	4b df       	rcall	.-362    	; 0x94 <setLED>
+ 1fe:	cf 5f       	subi	r28, 0xFF	; 255
+ 200:	c9 30       	cpi	r28, 0x09	; 9
+ 202:	d1 f7       	brne	.-12     	; 0x1f8 <main+0x74>
+ 204:	2f ef       	ldi	r18, 0xFF	; 255
+ 206:	80 e7       	ldi	r24, 0x70	; 112
+ 208:	92 e0       	ldi	r25, 0x02	; 2
+ 20a:	21 50       	subi	r18, 0x01	; 1
+ 20c:	80 40       	sbci	r24, 0x00	; 0
+ 20e:	90 40       	sbci	r25, 0x00	; 0
+ 210:	e1 f7       	brne	.-8      	; 0x20a <main+0x86>
+ 212:	00 c0       	rjmp	.+0      	; 0x214 <main+0x90>
+ 214:	00 00       	nop
+ 216:	ce cf       	rjmp	.-100    	; 0x1b4 <main+0x30>
+
+00000218 <_exit>:
+ 218:	f8 94       	cli
+
+0000021a <__stop_program>:
+ 21a:	ff cf       	rjmp	.-2      	; 0x21a <__stop_program>
