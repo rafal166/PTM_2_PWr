@@ -1,0 +1,66 @@
+Zadanie 1 – ocena 3
+Czym różnią się poszczególne pamięci?
+//SRAM - ulotna, każdy bit to 6 tranzystorów, bardzo szybki odczyt/zapis
+EEPROM - nieulotna, można usuwać i odczytywać bity, praktycznie nie ma limitu odczytu i zapisu (ponad 10^6)
+FLASH - nieulotna, jeden z typów EEPROM, można usuwać jedynie całe bloki danych, ale odczytywać już można pojedyńcze bity, około 100 000 operacji odczytu/zapisu, szybki odczyt
+
+Jaka jest pojemność poszczególnych pamięci w mikrokontrolerze Atmega32a? 
+//SRAM - 32kB
+EEPROM - 1024B
+FLASH - 2KB
+
+Jakie są ich wady i zalety?
+//Zalety:
+Flash jest szybka więc wykorzystywana jako pamięć programu.
+EEPROM można zapisywać wiele razy.
+SRAM jest mega szybka więc idealne cache
+
+Wady:
+Flash nie można zapisywać w nieskończoność
+EEPROM jest wolniejsza od Flash
+SRAM jest droga
+
+Utworzyć program z nieskończoną pętlą while, skompilować i sprawdzić wykorzystanie pamięci:
+
+przed funkcją „main” utworzyć jednoelementową tablicę typu „uint32_t”, jaki jest rozmiar tak skompilowanego programu w poszczególnych pamięciach?
+//Jeśli nie zapiszemy danych w pamięci eeprom, zostaną one zapisane w pamięci flash razem z programem.
+Program:     166 bytes (0.5% Full)
+(.text + .data + .bootloader)
+
+Data:          4 bytes (0.2% Full)
+(.data + .bss + .noinit)
+// jeśli zapiszemy w eepromie
+EEPROM:        4 bytes (0.4% Full)
+(.eeprom)
+
+zmienić tablicę aby zawierała miejsce na 100 elementów, jak teraz zmieni się rozmiar programu? W której pamięci jest przechowywana tablica?
+Rozmiar programu się nie zmienił, zmieniła się jedynie zajęta pamięć
+// dla flash
+Data:        400 bytes (19.5% Full)
+(.data + .bss + .noinit)
+// a dla eepromu
+EEPROM:      400 bytes (39.1% Full)
+(.eeprom)
+
+zmienić rozmiar tablicy na 1000 elementów – czy taka tablica jest możliwa do przechowywania w wybranym mikrokontrolerze?
+// dla flash
+Data:       4000 bytes (195.3% Full)
+(.data + .bss + .noinit)
+// a dla eepromu
+EEPROM:     4000 bytes (390.6% Full)
+(.eeprom)
+Gdy tablica znajduje się w pamięci flash to program nie chce się uruchomić na symulatorze. Gdy zapiszemy ją w eepromie to działa jak gdyby nigdy nic.
+
+zmodyfikować program aby tablica 1000 elementów została zapisana do pamięci flash. Czy teraz jest możliwe uruchomienie programu? 
+Nie jest możliwe
+Czy do takiej tablicy możemy zapisywać jakieś zmienne?
+W czasie kompilacji nie dostałem błędu, ale na symulatorze to nie działało, więc raczej nie można.
+ Do czego można wykorzystać zapisywanie dużych elementów w pamięci flash w czasie kompilacji?
+Do przeciążenia pamięci i niewykonania się programu. Nie mam innego pomysłu.
+
+Zadanie 2 – ocena 3,5
+Wykorzystanie pamięci Flash do przechowywania dużych stałych elementów.
+
+Utworzyć nowy program na podstawie poniższego kodu. Dodać biblioteki do obsługi LCD. Utworzyć symulacje z wyświetlaczem LCD 16×2. Jak działa ten program? W jakiej pamięci jest umieszczona zmienna „tab” i „tab2”?
+FLASH
+Zmodyfikować program tak aby na wyświetlaczu były wyświetlone zmienne z tablicy „tab” – odczyt należny wykonać z wykorzystaniem funkcji „pgm_read_”
